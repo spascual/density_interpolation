@@ -1,6 +1,7 @@
 import tensorflow_probability as tfp
 import tensorflow as tf
 import numpy as np
+import pytest
 
 from basic_quantile_pdf import LeftTail, RightTail, IntervalFunction
 from vect_interpolation import VectorizeQuantileInterpolation
@@ -36,7 +37,7 @@ def test_gradient_flow():
         interp = TFVectorizeQuantileInterpolation(x, f, u)
         pdf = interp(X)
         grad = tape.gradient(pdf, [theta])
-    assert grad is not None
+    assert grad[0] is not None
 
 
 def test_all_interpolations_agree():
